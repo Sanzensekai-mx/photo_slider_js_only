@@ -16,16 +16,6 @@ const imgList = [
 
 let nasaImgList = [];
 
-// let json = fetch(`https://api.nasa.gov/planetary/apod?api_key=${APIkeyNASA}&count=20`).then(response => response.json()).then(data => {
-//     // console.log(data);
-//     for (let obj of data) {
-//         // console.log(obj.url)
-//         nasaImgList.push(obj.url)
-//     }
-// })
-
-// console.log(nasaImgList)
-
 function validPosition(direction, pictList) {
     if (direction === 'forward') {
         curSliderPos++
@@ -39,22 +29,68 @@ function validPosition(direction, pictList) {
     }
     console.log(curSliderPos)
 }
-
+let imgTag = document.getElementsByClassName("image-wrapper")[0].children[0];
 
 function stepHandler(direction) {
     let imgTag = document.getElementsByClassName("image-wrapper")[0].children[0];
     if (curModeShow === 'asset') {
-        validPosition(direction, imgList)
-        imgTag.setAttribute("src", `./asset/${imgList[curSliderPos]}`)
+        animation_fade = imgTag.animate([
+            {opacity: 1},
+            {opacity: 0}
+        ], {
+            duration: 500,
+            iterations: 1,
+        })
+        animation_fade.play()
+        // console.log('fade!')
+        setTimeout(function () {
+            validPosition(direction, imgList)
+            imgTag.setAttribute("src", `./asset/${imgList[curSliderPos]}`)
+        }, 450)
+        animation_show = imgTag.animate([
+            {opacity: 0},
+            {opacity: 1}
+        ], {
+            duration: 500,
+            iterations: 1,
+            delay: 500
+        })
+        animation_show.play()  
         return
     } else if (curModeShow === 'nasa') {
-        validPosition(direction, nasaImgList)
-        console.log(nasaImgList[curSliderPos])
-        imgTag.setAttribute("src", nasaImgList[curSliderPos])
+        animation_fade = imgTag.animate([
+            {opacity: 1},
+            {opacity: 0}
+        ], {
+            duration: 1000,
+            iterations: 1,
+        })
+        setTimeout(function () {
+            validPosition(direction, nasaImgList)
+            imgTag.setAttribute("src", nasaImgList[curSliderPos])
+    
+        }, 600)
         return
     }
-    
 }
+
+
+function show(timePassed) {
+    imgTag.style.opacity = timePassed / 1000
+}
+
+function fade(timePassed) {
+    imgTag.style.opacity = -(timePassed / 1000 - 1)
+}
+
+function new_fade(progress) {
+    imgTag.style.opacity = -(progress / 1000 - 1)
+}
+
+function new_show(progress) {
+    imgTag.style.opacity = progress / 1000
+}
+
 
 document.getElementsByClassName("slider-btn-forward")[0].addEventListener('click', function (e) {
         stepHandler('forward')
@@ -65,11 +101,11 @@ document.getElementsByClassName("slider-btn-back")[0].addEventListener('click', 
 }, false);
 
 
-stepForwardDop.addEventListener('click', function(e) {
+document.getElementsByClassName("slider-btn-forward")[1].addEventListener('click', function(e) {
         stepHandler('forward')
 }, false);
 
-stepBackDop.addEventListener('click', function(e) {
+document.getElementsByClassName("slider-btn-back")[1].addEventListener('click', function(e) {
         stepHandler('back')
 }, false);
 
