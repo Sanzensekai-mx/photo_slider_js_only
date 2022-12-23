@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=`, initial-scale=1.0">
+    <title>Photo slider</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div class="page-content">
+        <header class="header">
+            <div class="fill-dir"></div>
+            <div class="header-title"><h1 id="title">Photo Slider</h1></div>
+            <nav class="site-func-panel">
+                <ul class="sitefunc-btns">
+                    <li><button class="func-btn" id="btnAsset">Картинки из asset</button></li>
+                    <li><button class="func-btn" id="btnNasa">Фото NASA (API)</button></li>
+                </ul>
+            </nav>
+        </header>
+        <main class="slider-content">
+            <section class="slider-main">
+                <div class="slider-btn slider-btn-back"><a href="#" id="stepBack">&lt;</a></div>
+                <div class="image-wrapper">
+                    <img src="./asset/gory_sneg_sumerki_194740_1920x1080.jpg" alt="Загрузка...">
+                </div>
+                <div class="slider-btn slider-btn-forward"><a href="#" id="stepForward">&gt;</a></div>
+            </section>
+            <section class="dop-slider-btns">
+                <div class="slider-btn-back dop-slider-btn"><a href="#" id="stepBackDop">&lt;</a></div>
+                <div class="slider-btn-forward dop-slider-btn"><a href="#" id="stepForwardDop">&gt;</a></div>
+            </section>
+            <section class="slider-preview"></section>
+        </main>
+    </div>
+    <script src="./js/script.js"></script>
+</body>
+</html>
