@@ -117,7 +117,48 @@ body {
 .image-wrapper {
     display: flex;
     justify-content: center;
+    max-width: 1300px;
+    /* min-width: 1000px; */
 }
+
+.hide-div {
+    display: none;
+    max-width: 1300px;
+    min-width: 1000px;
+    margin: auto;
+    height: 700px;
+    object-fit: contain;
+    object-position: 50% 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.loader {
+    --b: 10px;  /* border thickness */
+    --n: 10;    /* number of dashes*/
+    --g: 10deg; /* gap  between dashes*/
+    --c: rgb(0, 0, 0);   /* the color */
+    
+    width:100px; /* size */
+    aspect-ratio: 1;
+    border-radius: 50%;
+    padding: 1px; /* get rid of bad outlines */
+    background: conic-gradient(#0000,var(--c)) content-box;
+    --_m: /* we use +/-1deg between colors to avoid jagged edges */
+      repeating-conic-gradient(#0000 0deg,
+         #000 1deg calc(360deg/var(--n) - var(--g) - 1deg),
+         #0000     calc(360deg/var(--n) - var(--g)) calc(360deg/var(--n))),
+      radial-gradient(farthest-side,#0000 calc(98% - var(--b)),#000 calc(100% - var(--b)));
+    -webkit-mask: var(--_m);
+            mask: var(--_m);
+    -webkit-mask-composite: destination-in;
+            mask-composite: intersect;
+    animation: load 1s infinite steps(var(--n));
+  }
+  @keyframes load {to{transform: rotate(1turn)}}
+
 
 .image-wrapper > img {
     object-fit: contain;
@@ -163,10 +204,20 @@ body {
         min-width: 900px;
         height: 600px;
     }
+    .hide-div {
+        max-width: 1100px;
+        min-width: 900px;
+        height: 600px;
+    }
 }
 
 @media screen and (max-width: 1350px) {
     .image-wrapper > img {
+        max-width: 1000px;
+        /* min-width: 700px; */
+        height: 550px;
+    }
+    .hide-div {
         max-width: 1000px;
         /* min-width: 700px; */
         height: 550px;
@@ -179,10 +230,22 @@ body {
         /* min-width: 700px; */
         height: 500px;
     }
+
+    .hide-div {
+        max-width: 800px;
+        /* min-width: 700px; */
+        height: 500px;
+    }
 }
 
 @media screen and (max-width: 1155px) {
     .image-wrapper > img {
+        max-width: 100%;
+        /* max-height: 800px; */
+        height: 450px;
+    }
+
+    .hide-div {
         max-width: 100%;
         /* max-height: 800px; */
         height: 450px;
@@ -218,6 +281,14 @@ body {
         /* max-height: 800px; */
         height: 400px;
     }
+
+    .hide-div {
+        max-width: 100%;
+        min-width: 10%;
+        /* max-height: 800px; */
+        height: 400px;
+    }
+
     .dop-slider-btn {
         display: inline;
         font-size: 70px;

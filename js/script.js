@@ -16,13 +16,13 @@ const imgList = [
 
 let nasaImgList = [];
 
-let json = fetch(`https://api.nasa.gov/planetary/apod?api_key=${APIkeyNASA}&count=20`).then(response => response.json()).then(data => {
-    // console.log(data);
-    for (let obj of data) {
-        // console.log(obj.url)
-        nasaImgList.push(obj.url)
-    }
-})
+// let json = fetch(`https://api.nasa.gov/planetary/apod?api_key=${APIkeyNASA}&count=20`).then(response => response.json()).then(data => {
+//     // console.log(data);
+//     for (let obj of data) {
+//         // console.log(obj.url)
+//         nasaImgList.push(obj.url)
+//     }
+// })
 
 // console.log(nasaImgList)
 
@@ -77,14 +77,41 @@ stepBackDop.addEventListener('click', function(e) {
 // change mode to 'nasa'
 btnNasa.addEventListener('click', function(e) {
     let imgTag = document.getElementsByClassName("image-wrapper")[0].children[0];
-    curSliderPos = 0
-    curModeShow = 'nasa'
-    imgTag.setAttribute("src", nasaImgList[0])
+    // Убрать тэг изображения
+    imgTag.style.display = "none"
+    imgTag.setAttribute("src", null)
+    // Добавить анимашку загрузки, пока не дойдут изображения наса
+    let loaderContainer = document.getElementsByClassName("hide-div")[0]
+    loaderContainer.style.display = 'flex'
+
 }, false);
+
+btnNasa.addEventListener('click', function(e) {
+    nasaImgList = [];
+    let loaderContainer = document.getElementsByClassName("hide-div")[0];
+    let imgTag = document.getElementsByClassName("image-wrapper")[0].children[0];
+    let json = fetch(`https://api.nasa.gov/planetary/apod?api_key=${APIkeyNASA}&count=20`).then(response => response.json()).then(data => {
+        console.log(data);
+        // curModeShow = 'nasa'
+        for (let obj of data) {
+            console.log(obj.url)
+            nasaImgList.push(obj.url)
+        }
+    }).then( () => {
+        curSliderPos = 0
+        curModeShow = 'nasa'
+        imgTag.setAttribute("src", nasaImgList[0])
+        loaderContainer.style.display = 'none'
+        imgTag.style.display = "block"
+    })
+}, false)
 
 // change mode to asset
 btnAsset.addEventListener('click', function(e) {
     let imgTag = document.getElementsByClassName("image-wrapper")[0].children[0];
+    let loaderContainer = document.getElementsByClassName("hide-div")[0]
+    imgTag.style.display = "block";
+    loaderContainer.style.display = 'none';
     curSliderPos = 0
     curModeShow = 'asset'
     imgTag.setAttribute("src", `./asset/${imgList[0]}`)
