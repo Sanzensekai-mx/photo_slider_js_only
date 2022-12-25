@@ -27,9 +27,8 @@ function validPosition(direction, pictList) {
     } else if (curSliderPos > pictList.length - 1) {
         curSliderPos = 0
     }
-    console.log(curSliderPos)
+    // console.log(curSliderPos)
 }
-// let imgTag = document.getElementsByClassName("image-wrapper")[0].children[0];
 
 function stepHandler(direction) {
     let imgTag = document.getElementsByClassName("image-wrapper")[0].children[0];
@@ -129,7 +128,6 @@ btnNasa.addEventListener('click', function(e) {
     let imgTag = document.getElementsByClassName("image-wrapper")[0].children[0];
     let json = fetch(`https://api.nasa.gov/planetary/apod?api_key=${APIkeyNASA}&count=20`).then(response => response.json()).then(data => {
         console.log(data);
-        // curModeShow = 'nasa'
         for (let obj of data) {
             console.log(obj.url)
             nasaImgList.push(obj.url)
