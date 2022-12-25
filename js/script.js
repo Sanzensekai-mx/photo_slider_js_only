@@ -34,42 +34,11 @@ function stepHandler(direction) {
     let imgTag = document.getElementsByClassName("image-wrapper")[0].children[0];
 
     if (curModeShow === 'asset') {
-        animation_fade = imgTag.animate([
-            {opacity: 1},
-            {opacity: 0}
-        ], {
-            duration: 500,
-            iterations: 1,
-        })
-        animation_fade.play()
-        // console.log('fade!')
-        setTimeout(function () {
-            validPosition(direction, imgList)
-            imgTag.setAttribute("src", `./asset/${imgList[curSliderPos]}`)
-        }, 450)
-        animation_show = imgTag.animate([
-            {opacity: 0},
-            {opacity: 1}
-        ], {
-            duration: 500,
-            iterations: 1,
-            delay: 500
-        })
-        animation_show.play()  
-        return
+        validPosition(direction, imgList)
+        imgTag.setAttribute("src", `./asset/${imgList[curSliderPos]}`)
     } else if (curModeShow === 'nasa') {
-        animation_fade = imgTag.animate([
-            {opacity: 1},
-            {opacity: 0}
-        ], {
-            duration: 1000,
-            iterations: 1,
-        })
-        setTimeout(function () {
-            validPosition(direction, nasaImgList)
-            imgTag.setAttribute("src", nasaImgList[curSliderPos])
-    
-        }, 600)
+        validPosition(direction, nasaImgList)
+        imgTag.setAttribute("src", nasaImgList[curSliderPos])
         return
     }
 }
