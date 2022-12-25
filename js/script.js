@@ -29,10 +29,11 @@ function validPosition(direction, pictList) {
     }
     console.log(curSliderPos)
 }
-let imgTag = document.getElementsByClassName("image-wrapper")[0].children[0];
+// let imgTag = document.getElementsByClassName("image-wrapper")[0].children[0];
 
 function stepHandler(direction) {
     let imgTag = document.getElementsByClassName("image-wrapper")[0].children[0];
+
     if (curModeShow === 'asset') {
         animation_fade = imgTag.animate([
             {opacity: 1},
@@ -74,32 +75,32 @@ function stepHandler(direction) {
     }
 }
 
+// input.addEventListener('click', logKey);
 
-function show(timePassed) {
-    imgTag.style.opacity = timePassed / 1000
-}
-
-function fade(timePassed) {
-    imgTag.style.opacity = -(timePassed / 1000 - 1)
-}
-
-function new_fade(progress) {
-    imgTag.style.opacity = -(progress / 1000 - 1)
-}
-
-function new_show(progress) {
-    imgTag.style.opacity = progress / 1000
-}
+// function logKey(e) {
+//   log.textContent += ` ${e.code}`;
+// }
 
 
 document.getElementsByClassName("slider-btn-forward")[0].addEventListener('click', function (e) {
         stepHandler('forward')
 }, false);
 
+document.addEventListener('keydown', function (e) {
+    if (e.code === "ArrowRight") {
+    stepHandler('forward')
+    }
+}, false);
+
 document.getElementsByClassName("slider-btn-back")[0].addEventListener('click', function(e) {
         stepHandler('back')
 }, false);
 
+document.addEventListener('keydown', function (e) {
+    if (e.code === "ArrowLeft") {
+    stepHandler('forward')
+    }
+}, false);
 
 document.getElementsByClassName("slider-btn-forward")[1].addEventListener('click', function(e) {
         stepHandler('forward')

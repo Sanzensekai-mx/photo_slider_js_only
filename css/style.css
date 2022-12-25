@@ -88,6 +88,21 @@ body {
 	color: aliceblue;
 	box-shadow: inset 0 0 0 3px aliceblue;
 }
+
+.func-btn:focus {
+    outline: none !important;
+    border: none;
+	background: rgba(0,0,0,0);
+	color: aliceblue;
+	box-shadow: inset 0 0 0 3px aliceblue;
+}
+
+.func-btn:active {
+	background: rgba(0,0,0,0);
+	color: aliceblue;
+	box-shadow: inset 0 0 0 3px aliceblue;
+}
+
 .slider-content {
     background-color: aliceblue;
     padding: 50px 0;
@@ -120,15 +135,30 @@ body {
 
 }
 
-.slider-btn > a:hover {
-    color: rgb(255, 255, 255);
-}
-
 .slider-btn:hover {
     background: rgba(0,0,0, 0.4);
-    color: aliceblue;
-    /* border: 1px; */
-    /* border-color: black; */
+
+}
+
+.slider-btn:focus {
+    background: rgba(0,0,0, 0.4);
+    border: none;
+    outline: none !important;
+    box-shadow: none !important;
+
+}
+
+.slider-btn > a:focus {
+    background: rgba(0,0,0, 0.4);
+    border: none;
+    outline: none !important;
+    box-shadow: none !important;
+
+}
+
+.slider-btn:active {
+    background: rgba(0,0,0, 0.4);
+
 }
 
 .image-wrapper {
@@ -317,7 +347,18 @@ body {
 
     .dop-slider-btn:hover {
         background: rgba(0,0,0, 0.4);
-        color: aliceblue;
+    }
+
+    .sdop-slider-btn > a:focus {
+        background: rgba(0,0,0, 0.4);
+        border: none;
+        outline: none !important;
+        box-shadow: none !important;
+    
+    }
+
+    .dop-slider-btn:active {
+        background: rgba(0,0,0, 0.4);
     }
 
 }
