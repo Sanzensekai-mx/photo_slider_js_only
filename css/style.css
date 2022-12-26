@@ -181,12 +181,12 @@ body {
 }
 
 .fade {
-    animation-name: fade;
+    animation-name: fadeIn;
     animation-duration: 1.5s;
 }
 
-@keyframes fade {
-    from {opacity: .4}
+@keyframes fadeIn {
+    from {opacity: 0}
     to {opacity: 1}
 }
 

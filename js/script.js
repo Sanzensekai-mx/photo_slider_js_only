@@ -43,13 +43,13 @@ function stepHandler(direction) {
         previosImgTag.style.display = 'none'
         imgTag.style.display = 'block'
         return
-        
     } else if (curModeShow === 'nasa') {
         let [imgTag, previosImgTag] = validPosition(direction, nasaImgList)
         previosImgTag.style.display = 'none'
         imgTag.style.display = 'block'
         return
     }
+
 }
 
 // input.addEventListener('click', logKey);
@@ -121,6 +121,7 @@ function preLoadImg(pictList) {
         } else if (curModeShow === 'nasa') {
             newImgTag.setAttribute("src", pictList[img])
         }
+        newImgTag.setAttribute("class", "fade")
         newImgTag.style.display = img !== "0" ? 'none' : 'block'
     }
 }
