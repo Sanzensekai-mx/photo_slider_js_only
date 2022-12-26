@@ -37,16 +37,28 @@ function validPosition(direction, pictList) {
     return [imgTag, previosImgTag]
 }
 
+function changeClassAnimation(direction, previosImg, curImg) {
+    if (direction === 'forward') {
+        curImg.setAttribute('class', 'right')
+        previosImg.setAttribute('class', null)
+    } else if (direction === 'back') {
+        curImg.setAttribute('class', 'left')
+        previosImg.setAttribute('class', null)
+    }
+}
+
 function stepHandler(direction) {
     if (curModeShow === 'asset') {
         let [imgTag, previosImgTag] = validPosition(direction, imgList)
         previosImgTag.style.display = 'none'
         imgTag.style.display = 'block'
+        changeClassAnimation(direction, previosImgTag, imgTag)
         return
     } else if (curModeShow === 'nasa') {
         let [imgTag, previosImgTag] = validPosition(direction, nasaImgList)
         previosImgTag.style.display = 'none'
         imgTag.style.display = 'block'
+        changeClassAnimation(direction, previosImgTag, imgTag)
         return
     }
 
@@ -102,7 +114,6 @@ btnNasa.addEventListener('click', function(e) {
 
 function deletePreviousModeImg() {
     let imgWrapTag = document.getElementsByClassName("image-wrapper")[0];
-    console.log(imgWrapTag.children)
     while (imgWrapTag.firstChild) {
         imgWrapTag.removeChild(imgWrapTag.firstChild);
       }
@@ -111,17 +122,14 @@ function deletePreviousModeImg() {
 
 function preLoadImg(pictList) {
     const parentImgTag = document.getElementsByClassName("image-wrapper")[0]
-    console.log(pictList)
     for (let img in pictList) {
         let newImgTag = document.createElement("img")
         parentImgTag.appendChild(newImgTag)
-        console.log(pictList[img])
         if (curModeShow === 'asset') {
             newImgTag.setAttribute("src", `./asset/${imgList[img]}`)
         } else if (curModeShow === 'nasa') {
             newImgTag.setAttribute("src", pictList[img])
         }
-        newImgTag.setAttribute("class", "fade")
         newImgTag.style.display = img !== "0" ? 'none' : 'block'
     }
 }
