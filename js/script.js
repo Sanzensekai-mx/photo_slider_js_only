@@ -14,9 +14,14 @@ const imgList = [
     'zakat-zima-sneg-2.jpg'
 ]
 
+//init asset
+let imgTag = document.getElementsByClassName("image-wrapper")[0].children[0];
+preLoadImg(imgList)
+
 let nasaImgList = [];
 
 function validPosition(direction, pictList) {
+    let imgTag = document.getElementsByClassName("image-wrapper")[0].children[curSliderPos]
     if (direction === 'forward') {
         curSliderPos++
     } else if (direction === 'back') {
@@ -27,18 +32,22 @@ function validPosition(direction, pictList) {
     } else if (curSliderPos > pictList.length - 1) {
         curSliderPos = 0
     }
-    // console.log(curSliderPos)
+    let previosImgTag = imgTag;
+    imgTag = document.getElementsByClassName("image-wrapper")[0].children[curSliderPos]
+    return [imgTag, previosImgTag]
 }
 
 function stepHandler(direction) {
-    let imgTag = document.getElementsByClassName("image-wrapper")[0].children[0];
-
     if (curModeShow === 'asset') {
-        validPosition(direction, imgList)
-        imgTag.setAttribute("src", `./asset/${imgList[curSliderPos]}`)
+        let [imgTag, previosImgTag] = validPosition(direction, imgList)
+        previosImgTag.style.display = 'none'
+        imgTag.style.display = 'block'
+        return
+        
     } else if (curModeShow === 'nasa') {
-        validPosition(direction, nasaImgList)
-        imgTag.setAttribute("src", nasaImgList[curSliderPos])
+        let [imgTag, previosImgTag] = validPosition(direction, nasaImgList)
+        previosImgTag.style.display = 'none'
+        imgTag.style.display = 'block'
         return
     }
 }
@@ -91,20 +100,46 @@ btnNasa.addEventListener('click', function(e) {
 
 }, false);
 
+function deletePreviousModeImg() {
+    let imgWrapTag = document.getElementsByClassName("image-wrapper")[0];
+    console.log(imgWrapTag.children)
+    while (imgWrapTag.firstChild) {
+        imgWrapTag.removeChild(imgWrapTag.firstChild);
+      }
+
+}
+
+function preLoadImg(pictList) {
+    const parentImgTag = document.getElementsByClassName("image-wrapper")[0]
+    console.log(pictList)
+    for (let img in pictList) {
+        let newImgTag = document.createElement("img")
+        parentImgTag.appendChild(newImgTag)
+        console.log(pictList[img])
+        if (curModeShow === 'asset') {
+            newImgTag.setAttribute("src", `./asset/${imgList[img]}`)
+        } else if (curModeShow === 'nasa') {
+            newImgTag.setAttribute("src", pictList[img])
+        }
+        newImgTag.style.display = img !== "0" ? 'none' : 'block'
+    }
+}
+
 btnNasa.addEventListener('click', function(e) {
     nasaImgList = [];
     let loaderContainer = document.getElementsByClassName("hide-div")[0];
     let imgTag = document.getElementsByClassName("image-wrapper")[0].children[0];
+    deletePreviousModeImg();
     let json = fetch(`https://api.nasa.gov/planetary/apod?api_key=${APIkeyNASA}&count=20`).then(response => response.json()).then(data => {
-        console.log(data);
         for (let obj of data) {
-            console.log(obj.url)
             nasaImgList.push(obj.url)
+            imgTag.setAttribute("src", nasaImgList[0])
         }
     }).then( () => {
         curSliderPos = 0
         curModeShow = 'nasa'
-        imgTag.setAttribute("src", nasaImgList[0])
+        
+        preLoadImg(nasaImgList)
         loaderContainer.style.display = 'none'
         imgTag.style.display = "block"
     })
@@ -118,5 +153,7 @@ btnAsset.addEventListener('click', function(e) {
     loaderContainer.style.display = 'none';
     curSliderPos = 0
     curModeShow = 'asset'
-    imgTag.setAttribute("src", `./asset/${imgList[0]}`)
+    deletePreviousModeImg()
+    preLoadImg(imgList)
+
 }, false);
