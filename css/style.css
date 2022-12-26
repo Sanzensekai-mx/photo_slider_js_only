@@ -197,7 +197,7 @@ body {
 
 @keyframes slide-right {
     from {
-      margin-left: 50%;
+      margin-left: 30%;
       width: 200%;
       opacity: 0;
     }
@@ -211,7 +211,7 @@ body {
 
 @keyframes slide-left {
     from {
-      margin-right: 50%;
+      margin-right: 30%;
       width: 200%;
       opacity: 0;
     }
