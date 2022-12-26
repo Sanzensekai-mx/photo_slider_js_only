@@ -199,11 +199,13 @@ body {
     from {
       margin-left: 50%;
       width: 200%;
+      opacity: 0;
     }
   
     to {
       margin-left: 0%;
       width: 100%;
+      opacity: 1;
     }
   }
 
@@ -211,11 +213,13 @@ body {
     from {
       margin-right: 50%;
       width: 200%;
+      opacity: 0;
     }
   
     to {
       margin-right: 0%;
       width: 100%;
+      opacity: 1;
     }
   }
   
@@ -258,18 +262,6 @@ body {
     /* animation: fade 5s linear infinite; */
     /* animation-delay: 2.5s; */
 }
-@keyframes fade {
-    0% { opacity: 1 }
-    50% { opacity: 0 }
-    100% { opacity: 1 }
-  }
-
-@keyframes show {
-    0% { opacity: 1 }
-    50% { opacity: 0 }
-    100% { opacity: 1 }
-  }
-
 
 .dop-slider-btns {
     display: none;
