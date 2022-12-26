@@ -87,7 +87,7 @@ document.getElementsByClassName("slider-btn-back")[0].addEventListener('click', 
 
 document.addEventListener('keydown', function (e) {
     if (e.code === "ArrowLeft") {
-    stepHandler('forward')
+    stepHandler('back')
     }
 }, false);
 
